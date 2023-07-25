@@ -1,0 +1,3 @@
+BAGISTO_DOMAIN=adiamor-store.appexperts.us
+BASE_URL=https://adiamor-store.appexperts.us/graphql
+NODE_ENV=development
