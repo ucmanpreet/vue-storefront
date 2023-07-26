@@ -442,7 +442,7 @@ var useMakeOrder = core.useMakeOrderFactory(factoryParams);
 var params$8 = {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     productsSearch: function (context, params) { return __awaiter(void 0, void 0, void 0, function () {
-        var _a, productDetailResults, newProductResults, featuredProductResults, relatedProductResults;
+        var _a, productDetailResults, newProductResults, pageNumber, featuredProductResults, relatedProductResults;
         var _b, _c, _d, _e, _f;
         return __generator(this, function (_g) {
             switch (_g.label) {
@@ -469,7 +469,8 @@ var params$8 = {
                     return [2 /*return*/, ((_c = newProductResults === null || newProductResults === void 0 ? void 0 : newProductResults.data) === null || _c === void 0 ? void 0 : _c.newProducts) || []];
                 case 5:
                     console.log('Mocked: useProduct.getFeaturedProduct');
-                    return [4 /*yield*/, context.$bagisto.api.getFeaturedProduct(params)];
+                    pageNumber = 1704;
+                    return [4 /*yield*/, context.$bagisto.api.getFeaturedProduct(pageNumber)];
                 case 6:
                     featuredProductResults = _g.sent();
                     console.log('data=================', featuredProductResults);
@@ -907,6 +908,7 @@ var params$2 = {
                     return [4 /*yield*/, context.$bagisto.api.getOrderList(params)];
                 case 1:
                     orderListResults = _k.sent();
+                    console.log({ orderListResults: orderListResults }, 'Order list Result');
                     return [2 /*return*/, {
                             results: ((_d = (_c = orderListResults === null || orderListResults === void 0 ? void 0 : orderListResults.data) === null || _c === void 0 ? void 0 : _c.ordersList) === null || _d === void 0 ? void 0 : _d.data) || null,
                             pagination: ((_f = (_e = orderListResults === null || orderListResults === void 0 ? void 0 : orderListResults.data) === null || _e === void 0 ? void 0 : _e.ordersList) === null || _f === void 0 ? void 0 : _f.paginatorInfo) || null,
@@ -1177,7 +1179,9 @@ function getName(product) {
         for (var _i = 0, _a = product.productFlats; _i < _a.length; _i++) {
             var productFlat = _a[_i];
             if (productFlat.locale === 'en') {
-                return htmlDecode(productFlat.name) + ' Product-Id-' + product.id;
+                console.log(productFlat, 'product getters============');
+                // return   ((productFlat.name != 'null') ? htmlDecode(productFlat.name) : '') +' Product-Id-'+ product.id;
+                return ((productFlat.name) ? htmlDecode(productFlat.name) : '') + ' Product-Id-' + productFlat.id;
             }
         }
     }
@@ -1254,18 +1258,23 @@ function getGallery(product) {
 }
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getCoverImage(product) {
-    var _a, _b, _c;
-    if (!product || typeof product === 'undefined' || typeof product.cacheBaseImage === 'undefined') {
+    if (!product || typeof product === 'undefined' || typeof product.images === 'undefined') {
         return {
-            small: 'https://s3-eu-west-1.amazonaws.com/commercetools-maximilian/products/081223_1_small.jpg',
-            normal: 'https://s3-eu-west-1.amazonaws.com/commercetools-maximilian/products/081223_1_medium.jpg',
-            big: 'https://s3-eu-west-1.amazonaws.com/commercetools-maximilian/products/081223_1_large.jpg'
+            small: 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fprojectfba.com%2Famazon-images-not-showing%2F&psig=AOvVaw2gye9rw3OPMIipMCeiuk0D&ust=1690356058329000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCOiPgJypqYADFQAAAAAdAAAAABAD',
+            normal: 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fprojectfba.com%2Famazon-images-not-showing%2F&psig=AOvVaw2gye9rw3OPMIipMCeiuk0D&ust=1690356058329000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCOiPgJypqYADFQAAAAAdAAAAABAD',
+            big: 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fprojectfba.com%2Famazon-images-not-showing%2F&psig=AOvVaw2gye9rw3OPMIipMCeiuk0D&ust=1690356058329000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCOiPgJypqYADFQAAAAAdAAAAABAD'
+            // small: 'https://s3-eu-west-1.amazonaws.com/commercetools-maximilian/products/081223_1_small.jpg',
+            // normal: 'https://s3-eu-west-1.amazonaws.com/commercetools-maximilian/products/081223_1_medium.jpg',
+            // big: 'https://s3-eu-west-1.amazonaws.com/commercetools-maximilian/products/081223_1_large.jpg'
         };
     }
     return {
-        small: (_a = product.cacheBaseImage) === null || _a === void 0 ? void 0 : _a.smallImageUrl,
-        normal: (_b = product.cacheBaseImage) === null || _b === void 0 ? void 0 : _b.mediumImageUrl,
-        big: (_c = product.cacheBaseImage) === null || _c === void 0 ? void 0 : _c.largeImageUrl
+        // small: product.cacheBaseImage?.smallImageUrl,
+        // normal: product.cacheBaseImage?.mediumImageUrl,
+        // big: product.cacheBaseImage?.largeImageUrl
+        small: product.images[0],
+        normal: product.images[0],
+        big: product.images[0]
     };
 }
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
