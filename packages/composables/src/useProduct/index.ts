@@ -24,8 +24,10 @@ const params: UseProductFactoryParams<Product, SearchParams> = {
         return newProductResults?.data?.newProducts || [];
       case 'featuredProduct':
         console.log('Mocked: useProduct.getFeaturedProduct');
-        const featuredProductResults = await context.$bagisto.api.getFeaturedProduct(params);
-        console.log('data=================',featuredProductResults);
+        const pageNumber = 1704; // Replace this with the desired page number
+
+        const featuredProductResults = await context.$bagisto.api.getFeaturedProduct(pageNumber);
+        console.log('data=================', featuredProductResults);
 
         return featuredProductResults?.data?.products?.data || [];
       case 'relatedProduct':

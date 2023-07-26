@@ -263,6 +263,15 @@ export type ProductPriceHtml = {
 };
 
 export type FilterProductListingInput = {
+    id: Maybe<Scalars['Int']>;
+    type: Maybe<Scalars['String']>;
+    sku: Maybe<Scalars['String']>;
+    parentId : Maybe<Scalars['String']>;
+    attributeFamily: Maybe<Scalars['String']>;
+    qty: Maybe<Scalars['String']>;
+};
+
+export type FilterProductsInput = {
     categorySlug: Maybe<Scalars['String']>;
     search: Maybe<Scalars['String']>;
     price: Maybe<Scalars['String']>;
@@ -304,7 +313,7 @@ export type CreateRegisterInput = {
     // lastName: Maybe<Scalars['String']>;
 
     name: Maybe<Scalars['String']>;
-    
+
     email: Maybe<Scalars['String']>;
     password: Maybe<Scalars['String']>;
     passwordConfirmation: Maybe<Scalars['String']>;

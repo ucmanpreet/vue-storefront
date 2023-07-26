@@ -18,7 +18,10 @@ function getName(product: Product): string {
   if (typeof product !== 'undefined' && typeof product.productFlats !== 'undefined') {
     for (const productFlat of product.productFlats) {
       if (productFlat.locale === 'en') {
-        return   htmlDecode(productFlat.name) +' Product-Id-'+ product.id;
+        console.log(productFlat, 'product getters============');
+        // return   ((productFlat.name != 'null') ? htmlDecode(productFlat.name) : '') +' Product-Id-'+ product.id;
+        return ((productFlat.name) ? htmlDecode(productFlat.name) : '') + ' Product-Id-' + productFlat.id;
+
       }
     }
   }
@@ -34,7 +37,7 @@ function getSku(product: Product): string {
   if (typeof product !== 'undefined' && typeof product.productFlats !== 'undefined') {
     for (const productFlat of product.productFlats) {
       if (productFlat.locale === 'en') {
-        return  (htmlDecode(productFlat.sku) ? htmlDecode(productFlat.sku) : 'N/A')
+        return (htmlDecode(productFlat.sku) ? htmlDecode(productFlat.sku) : '');
       }
     }
   }
@@ -125,18 +128,25 @@ function getGallery(product: Product): AgnosticMediaGalleryItem[] {
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getCoverImage(product: Product): any {
-  if (!product || typeof product === 'undefined' || typeof product.cacheBaseImage === 'undefined') {
+  if (!product || typeof product === 'undefined' || typeof product.images === 'undefined') {
     return {
-      small: 'https://s3-eu-west-1.amazonaws.com/commercetools-maximilian/products/081223_1_small.jpg',
-      normal: 'https://s3-eu-west-1.amazonaws.com/commercetools-maximilian/products/081223_1_medium.jpg',
-      big: 'https://s3-eu-west-1.amazonaws.com/commercetools-maximilian/products/081223_1_large.jpg'
+      small: 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fprojectfba.com%2Famazon-images-not-showing%2F&psig=AOvVaw2gye9rw3OPMIipMCeiuk0D&ust=1690356058329000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCOiPgJypqYADFQAAAAAdAAAAABAD',
+      normal: 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fprojectfba.com%2Famazon-images-not-showing%2F&psig=AOvVaw2gye9rw3OPMIipMCeiuk0D&ust=1690356058329000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCOiPgJypqYADFQAAAAAdAAAAABAD',
+      big: 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fprojectfba.com%2Famazon-images-not-showing%2F&psig=AOvVaw2gye9rw3OPMIipMCeiuk0D&ust=1690356058329000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCOiPgJypqYADFQAAAAAdAAAAABAD'
+      // small: 'https://s3-eu-west-1.amazonaws.com/commercetools-maximilian/products/081223_1_small.jpg',
+      // normal: 'https://s3-eu-west-1.amazonaws.com/commercetools-maximilian/products/081223_1_medium.jpg',
+      // big: 'https://s3-eu-west-1.amazonaws.com/commercetools-maximilian/products/081223_1_large.jpg'
+
     };
   }
 
   return {
-    small: product.cacheBaseImage?.smallImageUrl,
-    normal: product.cacheBaseImage?.mediumImageUrl,
-    big: product.cacheBaseImage?.largeImageUrl
+    // small: product.cacheBaseImage?.smallImageUrl,
+    // normal: product.cacheBaseImage?.mediumImageUrl,
+    // big: product.cacheBaseImage?.largeImageUrl
+    small: product.images[0],
+    normal: product.images[0],
+    big: product.images[0]
   };
 }
 

@@ -22,6 +22,8 @@ const params: UseUserOrderFactoryParams<CustomerOrder, SearchParams> = {
     }
     const orderListResults = await context.$bagisto.api.getOrderList(params);
 
+    console.log({orderListResults}, 'Order list Result');
+
     return {
       results: orderListResults?.data?.ordersList?.data || null,
       pagination: orderListResults?.data?.ordersList?.paginatorInfo || null,

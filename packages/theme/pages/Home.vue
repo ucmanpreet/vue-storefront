@@ -55,7 +55,32 @@
           <!-- <div class="card" style="border:1px solid black;margin-right:2px;padding:5px" >
            <div> Product-Id: {{product.id}} </div>
            <div>Sku : {{product.sku}} </div>
-          </div> -->
+           <div>Sku : {{product.sku}} </div> -->
+
+            <!-- <div>Product Flats</div>
+             <div> Product-Id: {{productFlat.id}} </div>
+           <div>Name : {{productFlat.name}} </div>
+           <div>Price : {{productFlat.price}} </div>
+           <div>Short Description : {{productFlat.shortDescription}} </div> -->
+            
+           <!-- <SfCarouselItem class="carousel__item" v-for="(productFlat, i1) in product.productFlats" :key="`flat-product-${i1}`">
+            <SfProductCard
+            :title="productGetters.getName(productFlat)"
+            :image="productGetters.getCoverImage(productFlat).normal"
+            :regular-price="productGetters.getRegularPrice(productFlat)"
+            :special-price="productGetters.getSpecialPrice(productFlat)"
+            :max-rating="5"
+            :score-rating="productGetters.getAverageRating(productFlat)"
+            :reviews-count="productGetters.getTotalReviews(productFlat)"
+            class="carousel__item__product"
+            :is-in-wishlist="isInWishlist({ productFlat })"
+            @click:wishlist="!isInWishlist({ productFlat }) ? addItemToWishlist({ productFlat }) : removeProductFromWishlist(productFlat)"
+            :show-add-to-cart-button="true"
+            :is-added-to-cart="isInCart({ productFlat })"
+            @click:add-to-cart="addProductToCart(productFlat)"
+          />
+          </SfCarouselItem> -->
+          <!-- </div> -->
 
 
           <!-- {{product}} -->
